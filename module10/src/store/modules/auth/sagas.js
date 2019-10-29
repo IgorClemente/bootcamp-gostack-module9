@@ -21,7 +21,7 @@ export function* signIn({ payload }) {
       return;
     }
 
-    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
 
@@ -50,13 +50,13 @@ export function* signUp({ payload }) {
 }
 
 export function authToken({ payload }) {
-  const { token } = payload;
+  const { token } = payload.auth;
 
-  api.defaults.headers['Authorization'] = `Bearer ${token}`;
+  api.defaults.headers.Authorization = `Bearer ${token}`;
 }
 
 export default all([
-  takeLatest('persist/REHYDRATE', authToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
-  takeLatest('@auth/SIGN_UP_REQUEST', signUp)
+  takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  takeLatest('persist/REHYDRATE', authToken)
 ]);

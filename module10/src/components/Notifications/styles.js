@@ -63,6 +63,7 @@ export const Notification = styled.div`
   p {
     font-size: 13px;
     line-height: 18px;
+    margin-bottom: 5px;
   }
 
   time {
