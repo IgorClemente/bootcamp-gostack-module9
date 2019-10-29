@@ -15,7 +15,6 @@ function* updateProfile({ payload }) {
     );
 
     const response = yield call(api.put, 'users', profile);
-
     toast.success('Perfil atualizado com sucesso!');
 
     yield put(updateProfileSuccess(response.data));
