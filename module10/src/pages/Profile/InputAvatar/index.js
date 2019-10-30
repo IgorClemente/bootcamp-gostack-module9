@@ -38,12 +38,17 @@ export default function InputFile() {
   return (
     <Container>
       <label htmlFor="avatar">
-        <img src={preview} alt="" />
+        <img
+          src={
+            preview || 'https://api.adorable.io/avatars/50/abott@adorable.png'
+          }
+          alt=""
+        />
         <input
           type="file"
           id="avatar"
           accept="image/*"
-          data-set={file}
+          data-file={file}
           onChange={handleChange}
           ref={ref}
         />
