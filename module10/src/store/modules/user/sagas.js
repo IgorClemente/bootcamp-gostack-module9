@@ -7,10 +7,10 @@ import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 function* updateProfile({ payload }) {
   try {
-    const { name, email, ...rest } = payload.data;
-
+    const { name, email, avatar_id, ...rest } = payload.data;
+    console.tron.log(avatar_id);
     const profile = Object.assign(
-      { name, email },
+      { name, email, avatar_id },
       rest.oldPassword ? rest : {}
     );
 
