@@ -20,7 +20,7 @@ export default function InputFile() {
         path: 'dataset.file'
       });
     }
-  }, [ref, registerField]);
+  }, [ref]);
 
   async function handleChange(e) {
     const data = new FormData();
