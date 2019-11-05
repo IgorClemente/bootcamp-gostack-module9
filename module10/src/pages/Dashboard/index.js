@@ -25,7 +25,7 @@ const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 export default function Dashboard() {
   const [date, setDate] = useState(new Date());
-  const [schedules, setSchedules] = useState([]);
+  const [schedule, setSchedule] = useState([]);
 
   const dateFormatted = useMemo(
     () => format(date, "d 'de' MMMM", { locale: pt }),
@@ -37,16 +37,12 @@ export default function Dashboard() {
       const response = await api.get('schedules', {
         params: { date }
       });
-      console.tron.warn(response.data);
+
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
       const data = range.map(hour => {
         const checkDate = setSeconds(setMinutes(setHours(date, hour), 0), 0);
         const compareDate = utcToZonedTime(checkDate, timeZone);
-
-        response.data.forEach(a =>
-          console.tron.log(a.date, compareDate, checkDate)
-        );
 
         return {
           time: `${hour}:00h`,
@@ -57,7 +53,7 @@ export default function Dashboard() {
         };
       });
 
-      setSchedules(data);
+      setSchedule(data);
     }
 
     loadSchedule();
@@ -84,8 +80,8 @@ export default function Dashboard() {
       </header>
 
       <ul>
-        {console.tron.log(schedules)}
-        {schedules.map(time => (
+        {console.tron.log(schedule)}
+        {schedule.map(time => (
           <Time key={time.time} past={time.past} available={!time.appointment}>
             <strong>{time.time}</strong>
             <span>
